@@ -24,6 +24,24 @@ Route::namespace('Admin')->group(function () {
 });
 Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.' ], function () {
     Route::namespace('Admin')->group(function () {
+        
+        Route::group(['middleware' => ['role:admin|superadmin|professor, guard:employee']], function () {
+            Route::namespace('Schools')->group(function () {
+                Route::resource('schools', 'SchoolController');
+                Route::resource('schools.addresses', 'SchoolAddressController');
+                
+                Route::namespace('Professors')->group(function () {
+                    Route::resource('professors', 'ProfessorController');
+
+                });
+                
+                Route::namespace('Students')->group(function () {
+                    Route::resource('students', 'StudentController');
+
+                });
+            });
+        });
+        
         Route::group(['middleware' => ['role:admin|superadmin|clerk, guard:employee']], function () {
             Route::get('/', 'DashboardController@index')->name('dashboard');
             Route::namespace('Products')->group(function () {

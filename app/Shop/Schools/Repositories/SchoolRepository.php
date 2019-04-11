@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Shop\Employees\Repositories;
+namespace App\Shop\Schools\Repositories;
 
 use Jsdecena\Baserepo\BaseRepository;
-use App\Shop\Employees\Employee;
-use App\Shop\Employees\Exceptions\EmployeeNotFoundException;
-use App\Shop\Employees\Repositories\Interfaces\EmployeeRepositoryInterface;
+use App\Shop\Schools\School;
+use App\Shop\Schools\Exceptions\SchoolNotFoundException;
+use App\Shop\Schools\Repositories\Interfaces\SchoolRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInterface
+class SchoolRepository extends BaseRepository implements SchoolRepositoryInterface
 {
     /**
-     * EmployeeRepository constructor.
+     * SchoolRepository constructor.
      *
-     * @param Employee $employee
+     * @param School $employee
      */
-    public function __construct(Employee $employee)
+    public function __construct(School $employee)
     {
         parent::__construct($employee);
         $this->model = $employee;
@@ -32,7 +32,7 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
      *
      * @return Collection
      */
-    public function listEmployees(string $order = 'id', string $sort = 'desc'): Collection
+    public function listSchools(string $order = 'id', string $sort = 'desc'): Collection
     {
         return $this->all(['*'], $order, $sort);
     }
@@ -42,9 +42,9 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
      *
      * @param array $data
      *
-     * @return Employee
+     * @return School
      */
-    public function createEmployee(array $data): Employee
+    public function createSchool(array $data): School
     {
         $data['password'] = Hash::make($data['password']);
         return $this->create($data);
@@ -55,14 +55,14 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
      *
      * @param int $id
      *
-     * @return Employee
+     * @return School
      */
-    public function findEmployeeById(int $id): Employee
+    public function findSchoolById(int $id): School
     {
         try {
             return $this->findOneOrFail($id);
         } catch (ModelNotFoundException $e) {
-            throw new EmployeeNotFoundException;
+            throw new SchoolNotFoundException;
         }
     }
 
@@ -73,7 +73,7 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
      *
      * @return bool
      */
-    public function updateEmployee(array $params): bool
+    public function updateSchool(array $params): bool
     {
         if (isset($params['password'])) {
             $params['password'] = Hash::make($params['password']);
@@ -109,11 +109,11 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
     }
 
     /**
-     * @param Employee $employee
+     * @param School $employee
      *
      * @return bool
      */
-    public function isAuthUser(Employee $employee): bool
+    public function isAuthUser(School $employee): bool
     {
         $isAuthUser = false;
         if (Auth::guard('employee')->user()->id == $employee->id) {
@@ -126,7 +126,7 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
      * @return bool
      * @throws \Exception
      */
-    public function deleteEmployee() : bool
+    public function deleteSchool() : bool
     {
         return $this->delete();
     }
