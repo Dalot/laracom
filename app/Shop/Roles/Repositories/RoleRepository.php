@@ -90,7 +90,7 @@ class RoleRepository extends BaseRepository implements RoleRepositoryInterface
     public function deleteRoleById() : bool
     {
         try {
-            return $this->delete();
+            return $this->model->where('id', $this->model->id)->delete();
         } catch (QueryException $e) {
             throw new DeleteRoleErrorException($e);
         }

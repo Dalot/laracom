@@ -90,7 +90,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name') }}</a>
+                    <a class="navbar-brand" style="padding:0;" href="{{ route('home') }}">{{ config('app.name') }}</a>
                 </div>
                 <div class="col-md-10">
                     @include('layouts.front.header-cart')

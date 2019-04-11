@@ -108,4 +108,15 @@ class RoleController extends Controller
         return redirect()->route('admin.roles.edit', $id)
             ->with('message', 'Update role successful!');
     }
+    
+    public function destroy($id)
+    {
+        $role = $this->roleRepo->findRoleById($id);
+        
+        $roleRepo = new RoleRepository($role);
+        $roleRepo->deleteRoleById();
+
+        return redirect()->route('admin.roles.index')
+            ->with('message', 'Delete role successful!');
+    }
 }
