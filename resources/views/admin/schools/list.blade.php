@@ -9,7 +9,7 @@
         @if($schools)
         <div class="box">
             <div class="box-body">
-                <h2>Employees</h2>
+                <h2>Schools</h2>
                 <table class="table">
                     <thead>
                         <tr>

@@ -14,10 +14,12 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\Shop\Addresses\Address;
 use App\Shop\Customers\Customer;
+use App\Shop\Schools\School;
 
 $factory->define(Address::class, function (Faker\Generator $faker) {
 
     $customer = factory(Customer::class)->create();
+    $school = factory(School::class)->create();
 
     return [
         'alias' => $faker->word,
@@ -28,6 +30,7 @@ $factory->define(Address::class, function (Faker\Generator $faker) {
         'province_id' => 1,
         'country_id' => 1,
         'customer_id' => $customer->id,
+        'school_id' => $school->id,
         'status' => 1
     ];
 });

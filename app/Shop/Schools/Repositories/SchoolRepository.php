@@ -44,10 +44,22 @@ class SchoolRepository extends BaseRepository implements SchoolRepositoryInterfa
      *
      * @return School
      */
-    public function createSchool(array $data): School
+    public function createSchool(array $params): School
     {
-        $data['password'] = Hash::make($data['password']);
-        return $this->create($data);
+        try {
+            $data = collect($params)->except('password')->all();
+
+            $school = new School($data);
+            if (isset($params['password'])) {
+                $school->password = bcrypt($params['password']);
+            }
+
+            $school->save();
+
+            return $school;
+        } catch (QueryException $e) {
+            throw new CreateSchoolInvalidArgumentException($e->getMessage(), 500, $e);
+        }
     }
 
     /**

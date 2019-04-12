@@ -31,7 +31,7 @@
 
                     <div class="product-text">
                         <h4>{{ $product->name }}</h4>
-                        <p>
+                        <p style="text-transform:uppercase;">
                             {{ config('cart.currency') }}
                             @if(!is_null($product->attributes->where('default', 1)->first()))
                                 @if(!is_null($product->attributes->where('default', 1)->first()->sale_price))

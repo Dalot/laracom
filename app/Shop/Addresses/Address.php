@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Shop\Cities\City;
 use App\Shop\Countries\Country;
+use App\Shop\Schools\School;
 use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Address extends Model
@@ -30,6 +31,7 @@ class Address extends Model
         'province_id',
         'country_id',
         'customer_id',
+        'school_id',
         'status',
         'phone'
     ];
@@ -73,6 +75,11 @@ class Address extends Model
     public function province()
     {
         return $this->belongsTo(Province::class);
+    }
+    
+    public function school()
+    {
+        return $this->belongsTo(School::class);
     }
 
     /**

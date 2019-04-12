@@ -35,6 +35,29 @@ class EmployeesTableSeeder extends Seeder
             'display_name' => 'Update order'
         ]);
 
+         // ===============
+        $createStudentPerm = factory(Permission::class)->create([
+            'name' => 'create-student',
+            'display_name' => 'Create student'
+        ]);
+
+        $viewStudentPerm = factory(Permission::class)->create([
+            'name' => 'view-student',
+            'display_name' => 'View student'
+        ]);
+
+        $updateStudentPerm = factory(Permission::class)->create([
+            'name' => 'update-student',
+            'display_name' => 'Update student'
+        ]);
+
+        $deleteStudentPerm = factory(Permission::class)->create([
+            'name' => 'delete-student',
+            'display_name' => 'Delete student'
+        ]);
+        
+        // =========================
+
         $employee = factory(Employee::class)->create([
             'email' => 'john@doe.com'
         ]);
@@ -43,6 +66,7 @@ class EmployeesTableSeeder extends Seeder
             'name' => 'superadmin',
             'display_name' => 'Super Admin'
         ]);
+        
 
         $roleSuperRepo = new RoleRepository($super);
         $roleSuperRepo->attachToPermission($createProductPerm);
@@ -72,19 +96,24 @@ class EmployeesTableSeeder extends Seeder
         $employee->roles()->save($admin);
 
         $employee = factory(Employee::class)->create([
-            'email' => 'clerk@doe.com'
+            'email' => 'professor@doe.com'
         ]);
 
-        $clerk = factory(Role::class)->create([
-            'name' => 'clerk',
-            'display_name' => 'Clerk'
+        $professor = factory(Role::class)->create([
+            'name' => 'Professor',
+            'display_name' => 'Professor'
         ]);
 
-        $roleClerkRepo = new RoleRepository($clerk);
-        $roleClerkRepo->attachToPermission($createProductPerm);
+        $roleProfessorRepo = new RoleRepository($professor);
+        
+        $roleProfessorRepo->attachToPermission($createStudentPerm);
+        $roleProfessorRepo->attachToPermission($viewStudentPerm);
+        $roleProfessorRepo->attachToPermission($updateStudentPerm);
+        $roleProfessorRepo->attachToPermission($deleteStudentPerm);
+        /*$roleClerkRepo->attachToPermission($createProductPerm);
         $roleClerkRepo->attachToPermission($viewProductPerm);
-        $roleClerkRepo->attachToPermission($updateProductPerm);
+        $roleClerkRepo->attachToPermission($updateProductPerm);*/
 
-        $employee->roles()->save($clerk);
+        $employee->roles()->save($professor);
     }
 }

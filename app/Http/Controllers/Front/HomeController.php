@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Shop\Categories\Repositories\Interfaces\CategoryRepositoryInterface;
-
+use App\Shop\Categories\Category;
 class HomeController
 {
     /**
@@ -25,10 +25,21 @@ class HomeController
      */
     public function index()
     {
+        $cats = Category::all();
+        // $cat1 = $this->categoryRepo->findCategoryById(4);
+        // $cat2 = $this->categoryRepo->findCategoryById(5);
         
-        $cat1 = $this->categoryRepo->findCategoryById(4);
-        $cat2 = $this->categoryRepo->findCategoryById(5);
-
-        return view('front.index', compact('cat1', 'cat2'));
+        foreach($cats as $key=>$cat)
+        {
+           
+            if ($key === 1) {
+                $cat1 = $this->categoryRepo->findCategoryById($key);
+            }
+            else if ( $key === 2) {
+                $cat2 = $this->categoryRepo->findCategoryById($key);
+            }
+        }
+        
+        return view('front.index', compact('cat1','cat2'));
     }
 }

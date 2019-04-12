@@ -38,6 +38,8 @@ use App\Shop\Provinces\Repositories\Interfaces\ProvinceRepositoryInterface;
 use App\Shop\Provinces\Repositories\ProvinceRepository;
 use App\Shop\Roles\Repositories\RoleRepository;
 use App\Shop\Roles\Repositories\RoleRepositoryInterface;
+use App\Shop\Schools\Repositories\SchoolRepository;
+use App\Shop\Schools\Repositories\Interfaces\SchoolRepositoryInterface;
 use App\Shop\Shipping\ShippingInterface;
 use App\Shop\Shipping\Shippo\ShippoShipmentRepository;
 use App\Shop\States\Repositories\StateRepository;
@@ -146,6 +148,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             PermissionRepositoryInterface::class,
             PermissionRepository::class
+        );
+        
+        $this->app->bind(
+            SchoolRepositoryInterface::class,
+            SchoolRepository::class
         );
     }
 }
