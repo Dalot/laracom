@@ -40,6 +40,10 @@ use App\Shop\Roles\Repositories\RoleRepository;
 use App\Shop\Roles\Repositories\RoleRepositoryInterface;
 use App\Shop\Schools\Repositories\SchoolRepository;
 use App\Shop\Schools\Repositories\Interfaces\SchoolRepositoryInterface;
+use App\Shop\Students\Repositories\StudentRepository;
+use App\Shop\Students\Repositories\Interfaces\StudentRepositoryInterface;
+use App\Shop\Professors\Repositories\ProfessorRepository;
+use App\Shop\Professors\Repositories\Interfaces\ProfessorRepositoryInterface;
 use App\Shop\Shipping\ShippingInterface;
 use App\Shop\Shipping\Shippo\ShippoShipmentRepository;
 use App\Shop\States\Repositories\StateRepository;
@@ -153,6 +157,16 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             SchoolRepositoryInterface::class,
             SchoolRepository::class
+        );
+        
+        $this->app->bind(
+            StudentRepositoryInterface::class,
+            StudentRepository::class
+        );
+        
+        $this->app->bind(
+            ProfessorRepositoryInterface::class,
+            ProfessorRepository::class
         );
     }
 }

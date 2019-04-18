@@ -9,8 +9,6 @@ $factory->define(School::class, function (Faker $faker) {
     return [
         'name' => $faker->firstName,
         'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
         'status' => 1
     ];
 });

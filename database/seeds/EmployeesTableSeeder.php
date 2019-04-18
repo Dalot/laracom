@@ -4,6 +4,7 @@ use App\Shop\Employees\Employee;
 use App\Shop\Permissions\Permission;
 use App\Shop\Roles\Repositories\RoleRepository;
 use App\Shop\Roles\Role;
+use App\Shop\Professors\Professor;
 use Illuminate\Database\Seeder;
 
 class EmployeesTableSeeder extends Seeder
@@ -98,11 +99,15 @@ class EmployeesTableSeeder extends Seeder
         $employee = factory(Employee::class)->create([
             'email' => 'professor@doe.com'
         ]);
-
+        
+        
+        
         $professor = factory(Role::class)->create([
-            'name' => 'Professor',
+            'name' => 'professor',
             'display_name' => 'Professor'
         ]);
+        
+        factory(Professor::class)->create();
 
         $roleProfessorRepo = new RoleRepository($professor);
         

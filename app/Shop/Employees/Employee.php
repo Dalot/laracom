@@ -2,6 +2,7 @@
 
 namespace App\Shop\Employees;
 
+use App\Shop\Professors\Professor;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -34,4 +35,9 @@ class Employee extends Authenticatable
     ];
 
     protected $dates = ['deleted_at'];
+    
+    
+    public function professor() {
+        return $this->hasOne(Professor::class);
+    }
 }

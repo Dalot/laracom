@@ -189,7 +189,7 @@
                 </li>
             </ul>
         </li>
-        @endif
+        
             <li class="treeview @if(request()->segment(2) == 'countries' || request()->segment(2) == 'provinces') active @endif">
                 <a href="#">
                     <i class="fa fa-flag"></i> <span>Countries</span>
@@ -214,6 +214,34 @@
                     <li><a href="{{ route('admin.couriers.create') }}"><i class="fa fa-plus"></i> Create courier</a></li>
                 </ul>
             </li>
+            @endif
+            @if($user->hasRole('professor'))
+            <li class="header">My School</li>
+           
+            <li class="treeview @if(request()->segment(2) == 'employees' || request()->segment(2) == 'roles' || request()->segment(2) == 'permissions') active @endif">
+                <a href="#">
+                    <i class="fa fa-star"></i> <span>School</span>
+                    <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    
+                    <li class="@if(request()->segment(2) == 'permissions') active @endif">
+                        <a href="#">
+                            <i class="fa fa-star-o"></i> <span>Students</span>
+                            <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ route('admin.students.index') }}"><i class="fa fa-circle-o"></i> List students</a></li>
+                            <li><a href="{{ route('admin.students.create') }}"><i class="fa fa-circle-o"></i> Create students</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            @endif
         </ul>
        
     </section>
